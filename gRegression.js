@@ -42,7 +42,7 @@ function regressionDialog() {
   var visibilitySwitcher = app.createServerHandler('visibilitySwitcher').addCallbackElement(modeList);
   modeList.addChangeHandler(visibilitySwitcher);
   app.add(app.createLabel('…of order').setId('polynomialLabel').setVisible(false));
-  var order = app.createListBox().setName('polynomialOrder').setId('polynomialOrder').setVisible(false).addItem(2).addItem(3).addItem(4).addItem(5);
+  var order = app.createListBox().setName('polynomialOrder').setId('polynomialOrder').setVisible(false).addItem('2', 2).addItem('3', 3).addItem('4', 4).addItem('5', 5);
   handler.addCallbackElement(order);
   app.add(order);
 
@@ -96,13 +96,14 @@ function visibilitySwitcher(eventInfo) {
 
 // The function coordinating the regression analysis.
 function regressionHandler(eventInfo) {
-  if (eventInfo.parameter.mode == 'polynomial' && SpreadsheetApp.getActiveRange().getNumRows() >= parseInt(eventInfo.parameter.polynomialOrder)) {
+  if (eventInfo.parameter.mode == 'polynomial' && SpreadsheetApp.getActiveRange().getNumRows() <= parseInt(eventInfo.parameter.polynomialOrder)) {
     Browser.msgBox('Error', 'You need more data points to do polynomial regression of this order. Select more rows and try again.', null);
+    return UiApp.getActiveApplication().close();
   }
 
   // Get the best fit, and display it.
   var values = SpreadsheetApp.getActiveRange().getValues();
-  var result = window.regression(eventInfo.parameter.mode, values, eventInfo.parameter.polynomialOrder);
+  var result = window.regression(eventInfo.parameter.mode, values, parseInt(eventInfo.parameter.polynomialOrder));
   Browser.msgBox('Best fit', result.string, null);
 
   // Build a new sheet, if asked to.
@@ -129,7 +130,7 @@ function regressionHandler(eventInfo) {
     var chart = newSheet.newChart()
       .setChartType(Charts.ChartType.SCATTER)
       .addRange(dataRange)
-      .setPosition(5, 5, 0, 0)
+      .setPosition(1, 4, 0, 0)
       .setOption('title', result.string)
       .build();
     newSheet.insertChart(chart);
