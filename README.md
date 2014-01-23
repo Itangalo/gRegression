@@ -1,7 +1,7 @@
 gRegression
 ===========
 
-Google Drive script for doing regression analysis of spreadsheet data. Build on the regression script by Tom Alexander: https://github.com/Tom-Alexander/regression-js
+Google Drive script for doing regression analysis of spreadsheet data. Builds on the regression script by Tom Alexander: https://github.com/Tom-Alexander/regression-js
 
 
 How to use
