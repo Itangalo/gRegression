@@ -148,10 +148,19 @@ function help() {
   var handler = app.createServerHandler('close');
   app.add(app.createHTML('<strong>How to use:</strong> Select x and y data by click-and-drag in the spreadsheet, then run "regression analysis" from the menu and select the relevant options. (Data must be in columns, with x values in the first selected column.)<br/>'));
   app.add(app.createHTML('Use the option "Create a new sheet with regression-fitted data and a scatter plot" to have the function-fitted data plotted in a chart with no extra work.<br/><br/>'));
-  app.add(app.createHTML('Thanks to Thanks to Tom Alexander for the JavaScript library for regression analysis: https://github.com/Tom-Alexander/regression-js)<br/><br/>'));
+
+  app.add(app.createHTML('Thanks to Thanks to Tom Alexander for the JavaScript library for regression analysis: https://github.com/Tom-Alexander/regression-js<br/><br/>'));
   app.add(app.createHTML('Follow the link below to find more information about this project, including source code and issue queue.<br/><br/>'));
   app.add(app.createAnchor('gRegression project page on GitHub', 'https://github.com/Itangalo/gRegression'));
+
+  app.add(app.createHTML('<br/>'));
   app.add(app.createButton('OK!', handler));
+
+  app.add(app.createHTML('<strong>Swedish!</strong><br/>'));
+  app.add(app.createAnchor('Här finns en videodemonstration av gRegression', 'http://youtu.be/WVK1t9Ws57E'));
+  app.add(app.createHTML(''));
+  app.add(app.createAnchor('Fler digitala matteresurser', 'https://tinyurl.com/digitalamatteresurser'));
+
   SpreadsheetApp.getActiveSpreadsheet().show(app);
 }
 
