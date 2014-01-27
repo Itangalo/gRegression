@@ -159,6 +159,8 @@ function regressionHandler(eventInfo) {
   .setOption('title', result.string)
   .build();
   newSheet.insertChart(chart);
+
+  return UiApp.getActiveApplication().close();
 }
 
 // Simple handler for closing the active UI.
